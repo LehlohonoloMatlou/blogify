@@ -1,0 +1,29 @@
+{% extends  "blog/admin_parent.html" %}
+ 
+ {% block title %} Add Audience{% endblock %}
+ {%block content %}
+	<div class='col-sm-12 col-md-12 col-lg-12'>
+		<hr class='purple'/>
+		
+		<form action="{% url 'update_audience' audience_id %}" method="POST">{% csrf_token %}
+			<center>
+					<h1>Update Audience</h1>
+					<div class='col-sm-12 col-md-8 col-lg-6 card'>
+						<h2 class='mr-auto'> <a href="{% url 'delete_audience' audience_id %}" class='btn btn-danger btn-sm'>Delete Audience</a></h2>
+						<p><b>Fill in name and description of audience.</b></p>
+						
+						<label> Name :<span style='color:red'>{{form.name.errors}}</span></label>
+						{{form.name}}
+						
+						<label>Description <span style='color:red'>{{form.description.errors}}</span></label>
+						{{form.description}}
+						
+						<button type='submit' class='btn btn-md btn-success'>Update Audience</button>
+						<a href='/blogify/audiences/' class='btn btn btn-md grey'>Back</a>
+						</div>
+			</center>
+			
+		</form>
+		
+	</div>
+ {% endblock %}

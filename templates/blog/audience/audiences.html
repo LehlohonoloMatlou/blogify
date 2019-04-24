@@ -1,0 +1,28 @@
+{% extends  "blog/admin_parent.html" %}
+ {%block title%}Audiences{% endblock%}
+ {%block content %}
+	<hr class='purple'/>
+	<h2 class='text-center'>Audiences <a href="{% url 'add_audience' %}" class='btn btn-sm btn-default'> Add Audience</a></h2>
+	<hr class='purple'/>
+	<div class='col-sm-12 col-md-12 col-lg-12 row'>
+		
+		{% if audiences.count > 0 %}
+			{% for audience in audiences %}
+				<div  class='col-sm-12 col-md-5 col-lg-5 ml-5 mt-3 card'>
+					<h4 class='purple p-1'><a href="{% url 'update_audience' audience.id %}" style='color:white'>{{audience.name}}</a></h4>
+					
+					<p>{{audience.description}}</p>
+				</div>
+			{% endfor %}
+		{% else %}
+			<div class='showback'>
+						<div class='col-sm-12 col-md-12 col-lg-12 text-center'>
+						  <h3 class='purple-text'>No Audience</h3>
+						
+						  <h5>There is no audience found.</h5>
+						  <p>Please click the Add Audience button to add audience.</p>
+						</div>	
+					</div>
+		{% endif %}
+	</div>
+{% endblock %}
