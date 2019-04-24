@@ -1,0 +1,2 @@
+python=3.6.1=2
+django-summernote=0.8.11.4=py36_0
