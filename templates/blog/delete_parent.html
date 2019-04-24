@@ -1,0 +1,43 @@
+{% extends  "blog/admin_parent.html" %}
+
+{% block title %} Delete {{object_type}}{% endblock %}
+
+{% block content %}
+	<div class='col-sm-12 col-md-12 col-lg-12 p-t-10 pt-3'>
+		<hr class='purple'/>
+		<h1 class='purple-text text-center'>Delete {{object_type}}</h1>
+		<hr class='purple' />
+		<h2 class='pl-5'>Are you sure?</h2>
+    
+		<p class='pl-5'>Are you sure you want to delete the object "{{object_type}}"? All of the following related items will be deleted:</p>
+		<div class="col-md-12 col-lg-12 pl-5 card">
+			<h3>Summary</h3>
+			{% if object_type == 'Article'%}
+				<ul>
+						<li> Article : 1</li>
+						<li> Name : {{article.title}}</li>
+						<li> ID : {{article.id}}</li>
+				</ul>
+				<form action="{% url 'delete_article' article.id %}" method ='POST'>{% csrf_token %}
+						<button type='submit' class='btn btn-danger btn-md'>Delete Article</button>
+						<a href="{% url 'view_article' article.id %}" class='btn btn-default btn-md grey'>Cancel</a>
+				</form>
+				
+			{% elif object_type == 'Audience' %}
+					<ul>
+						<li>Audience : 1</li>
+						<li>Title : {{audience.name}}</li>
+						<li>ID : {{audience.id}}</li>
+					</ul>
+					
+					<form action="{% url 'delete_audience' audience.id %}" method='POST'>{% csrf_token %}
+						<button type='submit' class='btn btn-danger btn-md'>Delete Audience</button>
+						<a href="{% url 'update_audience' audience_id %}" class='btn btn-default btn-md grey'>Cancel</a>
+					</form>
+				</ul>
+			{% endif %}
+			
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends  "blog/parent.html" %}
+ {% load static %}
+ {%block other_css_files%}
+		<link href="{%  static 'summernote/summernote.css' %}" rel="stylesheet" />
+		
+{%endblock%}
+{% block navbar %}
+		<nav class="navbar navbar-expand-lg navbar-dark purple">
+                    <a class="navbar-brand" href="#blogify"><h2>Blogify</h2></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link waves-effect waves-light" href="#home">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link waves-effect waves-light" href="/blogify/articles/">Articles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link waves-effect waves-light" href="/blogify/audiences/">Audiences</a>
+                            </li>
+                    </div>
+           </nav>
+                <!--/.Navbar blue-->
+{% endblock %}
+		
+				
+{% block content %}
+
+{% endblock %}
+{%block other_js_files%}
+		 <script type="text/javascript" src="{%  static 'summernote/summernote.js' %}"></script>
+		<script type="text/javascript" src="{%  static 'summernote/summernote_custom.js' %}"></script>
+		 <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+		  <script src="{% static 'js/infinite.min.js' %}"></script>
+		  <script>
+			var infinite = new Waypoint.Infinite({
+			  element: $('.infinite-container')[0],
+			  onBeforePageLoad: function () {
+				$('.loading').show();
+			  },
+			  onAfterPageLoad: function ($items) {
+				$('.loading').hide();
+			  }
+			});
+		   </script>
+{% endblock %}
