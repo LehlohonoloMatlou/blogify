@@ -1,1 +1,34 @@
+{% extends  "blog/admin_parent.html" %}
 
+{% block title %} Article{% endblock %}
+
+{% block content %}
+	<div class='col-sm-12 col-md-12 col-lg-12 mt-5'>
+		<hr class='purple'/>
+		<h4 class='text-center purple-text'>{{article.title}} 
+			<a href="{% url 'update_article' article.id %}" class='btn btn-sm btn-default'>Update Article</a>
+			<a href="{% url 'delete_article' article.id %}" class='btn btn-sm btn-danger'>Delete<a>
+		</h4>
+		
+		{%if article.active %}
+			<span>Status - Active</span>
+		{% else %}
+			<span>Status - InActive</span>
+		{% endif %}
+		{% if article.audience %}
+			<span>Audience - {{article.audience}}</span>
+		{% endif %}
+		<hr class='purple'/>
+		<h6>Description</h6>
+		<p>{{article.description}}</p>
+		<center>
+		<img class='text-center' src='/media/{{article.context_image}}' style='max-height:350px;max-width:100%'/>
+		</center>
+		{% if article.author %}
+			<span><b>By {{article.author}}</b></span>
+		{% endif %}
+		<hr class='purple'/>
+		<p class='pl-5'>{{article.body|safe}}</p>
+		
+	</div>
+{% endblock %}

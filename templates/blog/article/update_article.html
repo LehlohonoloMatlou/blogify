@@ -1,0 +1,39 @@
+{% extends  "blog/admin_parent.html" %}
+
+ {% block title %} Update Article{% endblock %}
+ {% block content %}
+	<div class='col-sm-12 col-md-12 col-lg-12'>
+		<hr class='purple'/>
+		<form action="{% url 'update_article' article_id %}" enctype="multipart/form-data" method="POST">{% csrf_token %}
+			<center>
+					<div class='col-sm-12 col-md-8 col-lg-6 showback'>
+						<h2 class='mr-auto'>Update Article</h2>
+						<p><b>Fill in the required fields and click Update Article button.</b></p>
+						
+						<label> Title :<span style='color:red'>{{form.title.errors}}</span></label>
+						{{form.title}}
+						
+						<label> Context Image :<span style='color:red'>{{form.context_image.errors}}</span></label>
+						{{form.context_image}}
+						
+						<label> Description :<span style='color:red'>{{form.description.errors}}</span></label>
+						{{form.description}}
+						
+						<label> Body :<span style='color:red'>{{form.body.errors}}</span></label>
+						{{form.body}}
+						
+						<label> Active :<span style='color:red'>{{form.active.errors}}</span></label>
+						{{form.active}}
+						
+						<label> Audience :<span style='color:red'>{{form.audience.errors}}</span></label>
+						{{form.audience}}
+						
+						<button type='submit' class='btn btn-md btn-success'>Update Article</button>
+						<a href='/blogify/article/{{article_id}}/' class='btn btn btn-md grey'>Back</a>
+						</div>
+			</center>
+			
+		</form>
+		
+	</div>
+ {% endblock %}

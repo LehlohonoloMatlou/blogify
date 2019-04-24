@@ -1,0 +1,63 @@
+{% extends  "blog/admin_parent.html" %}
+{% block title%}Articles {%endblock%}
+ {%block content %}
+	<hr class='purple'/>
+	<h2 class='text-center'>Articles <a href="{% url 'add_article' %}" class='btn btn-sm btn-default'> Add Article</a></h2>
+	<hr class='purple'/>
+	<div class='col-sm-12 col-md-12 col-lg-12 '>
+		
+		{% if articles.count > 0 %}
+		  <div class='row infinite-container'>
+			{% for article in articles %}
+				<div  class='col-sm-12 col-md-12 col-lg-12 card p-3 infinite-item'>
+					
+					<div class='row'>
+						<div class='col-sm-12 col-md-5 col-lg-4'>
+							<img src='/media/{{article.context_image}}' style='max-height:200px;max-width:100%'/>
+						</div>
+						<div class='col-sm-12 col-md-7 col-lg-8'>
+							<h4 class='purple p-1'><a href="{% url 'update_article' article.id %}" style='color:white'>{{article.title}}</a></h4>
+							{% if article.author %}
+								<span>By <b>{{article.author}}</b></span>
+							{% endif %}
+							{% if article.description %}
+								<p>{{article.description|truncatewords:"150"|safe}}</p>
+							{% else %}
+								<p>------------------------</p>
+							{% endif %}
+							<hr class='purple'/>
+							{% if article.active == True %}
+								<span>Active</span>
+							{% else %}
+								<span>InActive</span>
+							{% endif%}
+							<a href="{% url 'view_article' article.id %}" class='btn btn-sm btn-outline-default'>View Article</a>
+							<a href="{% url 'update_article' article.id %}" class='btn btn-sm btn-outline-default'>Update Article</a>
+							
+					
+						</div>
+					</div>
+					
+				</div>
+			{% endfor %}
+		</div>
+				<div class="loading" style="display: none;">
+					Loading...
+				</div>
+			
+			{% if articles.has_next %}
+					<a class="infinite-more-link" href="?page={{articles.next_page_number}}">More</a>
+			{% endif %}
+		{% endif %}
+		{% if articles.count == 0%}
+			<div class='showback'>
+						<div class='col-sm-12 col-md-12 col-lg-12 text-center'>
+						  <h3 class='purple-text'>No Articles</h3>
+						
+						  <h5>There are no Articles found.</h5>
+						  <p>Please click the Add Article button to add an article.</p>
+						</div>	
+					</div>
+		{% endif %}
+	</div>
+{% endblock %}
