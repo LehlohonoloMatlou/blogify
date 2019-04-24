@@ -10,11 +10,13 @@ from blogify.models import Audience, Article
 from blogify.forms  import AudienceForm, ArticleForm
 
 
+@login_required
 def view_audiences(request):
 #return a list of all audience objects
 	audiences = Audience.objects.all()
 	return render(request,"blog/audience/audiences.html",{"audiences":audiences})
 
+@login_required
 def view_articles(request):
 #Return a list of all article objects
 	
@@ -36,12 +38,14 @@ def view_articles(request):
 
 	return render(request,"blog/article/articles.html",{"articles":page_articles})
 
+@login_required
 def view_audience(request,audience_id):
 # Return an audience that match the requested audience-id
 	url = "/blogify/update_audience/{!s}/".format(audience_id)
 	return redirect(url)
 
 
+@login_required
 def view_article(request,article_id):
 # Return an article that match the requested article-id
 
@@ -69,7 +73,7 @@ def view_article(request,article_id):
 		return render(request,"blog/article/articles.html",{"articles":page_articles,"error_msg":error_msg})
 
 
-
+@login_required
 def add_audience(request):
 # Add Audience to database if request method is POST else return add_audience form page if request method is GET
 
@@ -95,7 +99,7 @@ def add_audience(request):
 		audience_form = AudienceForm()
 		return render(request,"blog/audience/add_audience.html",{"form":audience_form})
 
-
+@login_required
 def add_article(request):
 # Add Article to database if request method is POST else return add_article form page
 
@@ -124,7 +128,7 @@ def add_article(request):
 		return render(request,"blog/article/add_article.html",{"form":article_form})
 
 
-
+@login_required
 def update_audience(request,audience_id):
 # Updates an Audience's details if request method is POST else returns update_audience form page if request method is GET
 	
@@ -162,7 +166,7 @@ def update_audience(request,audience_id):
 
 		return render(request,"blog/audience/update_audience.html",{"form":audience_form,"audience_id":audience_id})
 
-
+@login_required
 def update_article(request,article_id):
 # Update an article's details id request method is POST else return update_article form page
 
@@ -209,7 +213,7 @@ def update_article(request,article_id):
 		return render(request,"blog/article/update_article.html",{"form":article_form,"article_id":article_id})
 
 
-
+@login_required
 def delete_audience(request,audience_id):
 #Delete an audience object if request method is POST else ask for confirmation before deleting
 
@@ -236,7 +240,7 @@ def delete_audience(request,audience_id):
 		return render(request,"blog/delete_parent.html",{"object_type":"Audience","audience":audience,"related_articles":related_articles,"audience_id":audience_id})
 
 
-
+@login_required
 def delete_article(request,article_id):
 #Delete an article object if request method is POST else ask for confirmation before deleting article
 
